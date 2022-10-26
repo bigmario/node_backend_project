@@ -5,12 +5,12 @@ const db = {
     ]
 }
 
-function list(table) {
-    return db[table];
+async function list(table) {
+    return await db[table];
 }
 
-function get(table, id) {
-    return db[table].filter((item) => item.id === id)[0] || null;
+async function get(table, id) {
+    return await db[table].filter((item) => item.id === parseInt(id))[0] || null;
 }
 
 function upsert(table, data) {
