@@ -15,6 +15,7 @@ async function get(table, id) {
 
 async function upsert(table, data) {
     await db[table].push(data);
+    return data;
 }
 
 async function remove(table, id) {
