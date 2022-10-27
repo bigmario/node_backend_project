@@ -13,11 +13,11 @@ async function get(table, id) {
     return await db[table].filter((item) => item.id === parseInt(id))[0] || null;
 }
 
-function upsert(table, data) {
-    db[table].push(data);
+async function upsert(table, data) {
+    await db[table].push(data);
 }
 
-function remove(table, id) {
+async function remove(table, id) {
     return true;
 }
 
