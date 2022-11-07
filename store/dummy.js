@@ -7,12 +7,12 @@ const db = {
         {
           id: '1',
           username: 'mario',
-          password: '12345'
+          password: '$2a$10$i/XgbzXAUj2NO/DOhMQdce40EbzMXsqGQIKLD8a0M8jW2R2urQlAe'
         },
         {
           id: '2',
           username: 'andres',
-          password: '12345'
+          password: '$2a$10$i/XgbzXAUj2NO/DOhMQdce40EbzMXsqGQIKLD8a0M8jW2R2urQlAe'
         }
       ]
 }
