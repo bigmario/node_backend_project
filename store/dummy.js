@@ -1,7 +1,7 @@
 const db = {
     'user': [
-        { id: 1, name: 'Mario' },
-        { id: 2, name: 'Andres' }
+        { id: '1', name: 'Mario' },
+        { id: '2', name: 'Andres' }
     ]
 }
 
@@ -10,12 +10,17 @@ async function list(table) {
 }
 
 async function get(table, id) {
-    return await db[table].filter((item) => item.id === parseInt(id))[0] || null;
+    let col = await list(table);
+    return col.filter((item) => item.id === id)[0] || null;
 }
 
 async function upsert(table, data) {
+    if (!db[table]) {
+        db[table] = [];
+    }
     await db[table].push(data);
-    return data;
+
+    console.log(db);
 }
 
 async function remove(table, id) {
