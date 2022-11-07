@@ -1,12 +1,24 @@
 const db = {
-    'user': [
-        { id: '1', name: 'Mario' },
-        { id: '2', name: 'Andres' }
-    ]
+    user: [
+        { id: '1', username: 'mario', id: 1 },
+        { id: '2', username: 'andres', id: 2 }
+    ],
+    auth: [
+        {
+          id: '1',
+          username: 'mario',
+          password: '12345'
+        },
+        {
+          id: '2',
+          username: 'andres',
+          password: '12345'
+        }
+      ]
 }
 
 async function list(table) {
-    return await db[table];
+    return await db[table] || [];
 }
 
 async function get(table, id) {
@@ -27,4 +39,11 @@ async function remove(table, id) {
     return true;
 }
 
-module.exports = { list, get, upsert, remove }
+async function query(table, q) {
+    let col = await list(table);
+    let keys = Object.keys(q);
+    let key = keys[0];
+    return col.filter((item) => item.key === q.key)[0] || null;
+}
+
+module.exports = { list, get, upsert, remove, query }
