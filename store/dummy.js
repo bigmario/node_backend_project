@@ -1,9 +1,9 @@
 const db = {
-    user: [
-        { id: '1', username: 'mario', id: 1 },
-        { id: '2', username: 'andres', id: 2 }
+    'user': [
+        { id: '1', username: 'mario' },
+        { id: '2', username: 'andres' }
     ],
-    auth: [
+    'auth': [
         {
           id: '1',
           username: 'mario',
@@ -18,7 +18,7 @@ const db = {
 }
 
 async function list(table) {
-    return await db[table] || [];
+    return db[table] || [];
 }
 
 async function get(table, id) {
@@ -43,7 +43,7 @@ async function query(table, q) {
     let col = await list(table);
     let keys = Object.keys(q);
     let key = keys[0];
-    return col.filter((item) => item.key === q.key)[0] || null;
+    return col.filter((item) => item[key] === q[key])[0] || null;
 }
 
 module.exports = { list, get, upsert, remove, query }

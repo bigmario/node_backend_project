@@ -1,5 +1,5 @@
 const express = require('express');
-
+const secure = require('./secure');
 const response = require('../../../network/response');
 const controller = require('./index')
 
@@ -8,22 +8,22 @@ const router = express.Router();
 router.get('/', list)
 router.get('/:id', get)
 router.post('/', upsert)
-router.put('/', upsert)
+router.put('/', secure('update'), upsert)
 
 async function list (req, res) {
-    // controller.list()
-    // .then((lista) => {
-    //     response.success(req, res, lista, 200);
-    // })
-    // .catch((err) => {
-    //     response.error(req, res, err.message, 500);
-    // });
-    try {
-        const lista = await controller.list();
-        response.success(req, res, lista, 200);      
-    } catch (err) {
+    controller.list()
+    .then((lista) => {
+        response.success(req, res, lista, 200);
+    })
+    .catch((err) => {
         response.error(req, res, err.message, 500);
-    }
+    });
+    // try {
+    //     const lista = await controller.list();
+    //     response.success(req, res, lista, 200);      
+    // } catch (err) {
+    //     response.error(req, res, err.message, 500);
+    // }
     
 }
 

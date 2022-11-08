@@ -10,9 +10,11 @@ function verify(token) {
 }
 
 const check = {
-    own: function(req, owner) {
+    own: (req, owner) => {
         const decoded = decodeHeader(req);
-        console.log(decoded);
+        if (decoded.id !== owner) {
+            throw new Error('No puedes hacer esto');
+        }
     }
 }
 
@@ -35,10 +37,10 @@ function decodeHeader(req) {
     const decoded = verify(token);
 
     req.user = decoded;
+    return decoded;
 }
 
 module.exports = {
     sign,
-    decodeHeader,
-    getToken
+    check,
 };
