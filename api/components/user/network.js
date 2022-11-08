@@ -11,19 +11,19 @@ router.post('/', upsert)
 router.put('/', secure('update'), upsert)
 
 async function list (req, res) {
-    controller.list()
-    .then((lista) => {
-        response.success(req, res, lista, 200);
-    })
-    .catch((err) => {
-        response.error(req, res, err.message, 500);
-    });
-    // try {
-    //     const lista = await controller.list();
-    //     response.success(req, res, lista, 200);      
-    // } catch (err) {
+    // controller.list()
+    // .then((lista) => {
+    //     response.success(req, res, lista, 200);
+    // })
+    // .catch((err) => {
     //     response.error(req, res, err.message, 500);
-    // }
+    // });
+    try {
+        const lista = await controller.list();
+        response.success(req, res, lista, 200);      
+    } catch (err) {
+        response.error(req, res, err.message, 500);
+    }
     
 }
 
@@ -49,6 +49,7 @@ async function get(req, res) {
 async function upsert (req, res) {
     try {
         const user = await controller.upsert(req.body);
+        console.log(user);
         response.success(req, res, user, 201);      
     } catch (err) {
         response.error(req, res, err.message, 500);

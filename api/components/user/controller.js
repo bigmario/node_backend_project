@@ -38,7 +38,8 @@ module.exports = function(injectedStore) {
             })
         }
 
-        return store.upsert(TABLA, user);
+        store.upsert(TABLA, user);
+        return user;
     }
 
     return {
