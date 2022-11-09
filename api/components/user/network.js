@@ -27,22 +27,19 @@ async function list (req, res) {
     
 }
 
-async function get(req, res) {
-    // controller.get(req.params.id)
-    // .then((user) => {
-    //     response.success(req, res, user, 200);
-    // })
-    // .catch((err) => {
+async function get(req, res, next) {
+    controller.get(req.params.id)
+    .then((user) => {
+        response.success(req, res, user, 200);
+    })
+    .catch(next);
+
+    // try {
+    //     const user = await controller.get(req.params.id);
+    //     response.success(req, res, user, 200);      
+    // } catch (err) {
     //     response.error(req, res, err.message, 500);
-
-    // });
-
-    try {
-        const user = await controller.get(req.params.id);
-        response.success(req, res, user, 200);      
-    } catch (err) {
-        response.error(req, res, err.message, 500);
-    }
+    // }
     
 }
 

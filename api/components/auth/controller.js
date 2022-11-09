@@ -1,3 +1,4 @@
+const error = require('../../../utils/error');
 const bcrypt = require('bcrypt');
 const auth = require('../../../auth')
 const TABLA = 'auth';
@@ -5,7 +6,7 @@ module.exports = function(injectedStore) {
     let store = injectedStore;
 
     if(!store) {
-        store = require('../../../store/dummy');
+        store = require('../../../store/mysql');
     }
 
     async function upsert(data) {
@@ -31,7 +32,7 @@ module.exports = function(injectedStore) {
             //generar token
             return auth.sign(data);
         } else {
-            throw new Error('inormacion invalida');
+            throw error('inormacion invalida', 400);
         }
     }
 

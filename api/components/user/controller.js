@@ -20,7 +20,6 @@ module.exports = function(injectedStore) {
 
     async function upsert(body) {
         const user = {
-            name: body.name,
             username: body.username,
         }
 
