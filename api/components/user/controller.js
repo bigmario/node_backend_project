@@ -7,7 +7,7 @@ module.exports = function(injectedStore) {
     let store = injectedStore;
 
     if(!store) {
-        store = require('../../../store/dummy');
+        store = require('../../../store/mysql');
     }
 
     function list() {
@@ -18,32 +18,33 @@ module.exports = function(injectedStore) {
         return store.get(TABLA, id)
     }
 
-    async function upsert(body) {
+    async function insert(body) {
         const user = {
+            id: nanoid(),
+            name: body.name,
             username: body.username,
         }
 
-        if (body.id) {
-            user.id = body.id;
-        } else {
-            user.id = nanoid();
-        }
+        await auth.upsert({
+            id: user.id,
+            username: user.username,
+            password: body.password,
+        });
 
-        if (body.password || body.username) {
-            await auth.upsert({
-                id: user.id,
-                username: user.username,
-                password: body.password,
-            })
-        }
+        return await store.insert(TABLA, user);
+    }
 
-        store.upsert(TABLA, user);
-        return user;
+    function follow(from, to) {
+        return store.insert(TABLA+'_follow', {
+            user_from: from,
+            user_to: to,
+        });
     }
 
     return {
         list,
         get,
-        upsert,
+        insert,
+        follow,
     };
 };

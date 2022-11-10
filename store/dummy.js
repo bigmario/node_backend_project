@@ -1,7 +1,7 @@
 const db = {
     'user': [
-        { id: '1', username: 'mario' },
-        { id: '2', username: 'andres' }
+        { id: '1', name: 'mario' },
+        { id: '2', name: 'andres' }
     ],
     'auth': [
         {

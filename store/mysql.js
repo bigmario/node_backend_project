@@ -73,15 +73,6 @@ async function update(table, data) {
     })
 }
 
-async function upsert(table, data) {
-    console.log(data);
-    if (data && data.id) {
-        return update(table, data);
-    } else {
-        return insert(table, data);
-    }
-}
-
 function query(table, q) {
     return new Promise((resolve, reject) => {
         connection.query(`SELECT * FROM ${table} WHERE ?`, q,  (err, result) => {
@@ -91,4 +82,4 @@ function query(table, q) {
     });
 }
 
-module.exports = { list, get, upsert, query };
+module.exports = { list, get, insert, update, query };
