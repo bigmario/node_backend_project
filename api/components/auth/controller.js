@@ -27,13 +27,18 @@ module.exports = function(injectedStore) {
     
     async function login(username, password) {
         const data = await store.query(TABLA, { username: username });
-        const equals = await bcrypt.compare(password, data.password);
-        if (equals) {
-            //generar token
-            return auth.sign(data);
-        } else {
-            throw error('inormacion invalida', 400);
+        if (!data) {
+            throw error('Usuario no encontrado', 404)
         }
+
+        const equals = await bcrypt.compare(password, data.password);
+        if (!equals) {
+            throw error('información invalida', 400);
+        }
+
+        //generar token
+        return auth.sign(data);
+
     }
 
     return {

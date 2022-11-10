@@ -74,8 +74,12 @@ async function update(table, data) {
 }
 
 async function upsert(table, data) {
-    const result = data?.id ? update(table, data) : insert(table, data);
-    return result;
+    console.log(data);
+    if (data && data.id) {
+        return update(table, data);
+    } else {
+        return insert(table, data);
+    }
 }
 
 function query(table, q) {
