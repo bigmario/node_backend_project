@@ -1,27 +1,50 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/index.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "post/index-post.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/auth(.*)",
-        "dest": "/api/index.js"
-      },
-      {
-        "src": "/api/user(.*)",
-        "dest": "/api/index.js"
-      },
-      {
-        "src": "/api/post(.*)",
-        "dest": "/post/index-post.js"
-      }
-    ]
-  }
+  "version": 2,
+  "env": {
+    "HOST":"localhost",
+    "API_PORT":3000,
+
+    "POST_HOST":"localhost",
+    "POST_PORT":3002,
+
+    "JWT_SECRET":"super-secret",
+
+    "MYSQL_HOST":"localhost",
+    "MYSQL_USER":"admin",
+    "MYSQL_PASSWORD":"admin",
+    "MYSQL_DATABASE":"database",
+    "MYSQL_PORT":3307
+  },
+  "builds": [
+    {
+      "src": "src/api/index.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "src/microservices/mysql/index.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "src/microservices/posts/index.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/users(.*)",
+      "dest": "src/api/index.js"
+    },
+    {
+      "src": "/api/auth(.*)",
+      "dest": "src/api/index.js"
+    },
+    {
+      "src": "/api/posts(.*)",
+      "dest": "src/microservices/posts/index.js"
+    },
+    {
+      "src": "/api/mysql(.*)",
+      "dest": "src/microservices/mysql/index.js"
+    }
+  ]
+}
