@@ -5,6 +5,10 @@ module.exports = {
         host: process.env.HOST || 'localhost',
         port: process.env.API_PORT || 3000,
     },
+    post: {
+        host: process.env.POST_HOST || 'localhost',
+        port: process.env.POST_PORT || 3002,
+    },
     jwt: {
         secret: process.env.JWT_SECRET || 'notASecret',
     },

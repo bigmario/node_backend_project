@@ -7,7 +7,7 @@ module.exports = function(injectedStore) {
     let store = injectedStore;
 
     if(!store) {
-        store = require('../../../store/remote-mysql');
+        store = require('../../../store/mysql');
     }
 
     function list() {
