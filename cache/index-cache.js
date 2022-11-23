@@ -13,5 +13,5 @@ app.use(bodyParser.json());
 app.use('/', router)
 
 app.listen(config.cacheService.servicePort, () => {
-    console.log('Servicio de caché redis escuchando en el puerto', config.cacheService.port);
+    console.log('Servicio de caché redis escuchando en el puerto', config.cacheService.servicePort);
 })

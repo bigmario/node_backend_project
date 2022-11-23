@@ -10,6 +10,6 @@ app.use(bodyParser.json())
 
 app.use(errors);
 
-app.listen(3001, () => {
-    console.log(`DB escuchando en puerto 3001`);
+app.listen(config.mysqlService.servicePort, () => {
+    console.log(`DB escuchando en puerto ${config.mysqlService.servicePort}`);
 });

@@ -2,11 +2,11 @@ const mysql = require('mysql2');
 const config = require('../config');
 
 const dbConf = {
-    host: config.mysql.host,
-    user: config.mysql.user,
-    password: config.mysql.password,
-    database: config.mysql.database,
-    port: config.mysql.port,
+    host: config.mysqlService.host,
+    user: config.mysqlService.user,
+    password: config.mysqlService.password,
+    database: config.mysqlService.database,
+    port: config.mysqlService.port,
 };
 
 //connect

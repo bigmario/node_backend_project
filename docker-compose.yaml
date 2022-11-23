@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mysql1:
+  mysql:
     image: mysql:latest
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -13,45 +13,27 @@ services:
     volumes:
       - db-mysql1:/var/lib/mysql
 
-  mysql2:
-    image: mysql:latest
-    environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
-    env_file:
-      - .env
-    ports:
-      - 3308:3306
-    volumes:
-      - db-mysql2:/var/lib/mysql
-
-  phpmyadmin1:
+  phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
-     - PMA_HOST=mysql1
+     - PMA_HOST=mysql
     ports:
       - '8080:80'
     depends_on:
-      - mysql1
+      - mysql
     env_file:
       - .env
 
-  phpmyadmin2:
-    image: phpmyadmin/phpmyadmin
-    environment:
-     - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
-     - PMA_HOST=mysql2
+  redis:
+    image: redis:alpine
     ports:
-      - '8081:80'
-    depends_on:
-      - mysql2
+      - 6380:6379
     env_file:
       - .env
 
+  
 
 volumes:
   db-mysql1:
-    driver: local
-  db-mysql2:
     driver: local

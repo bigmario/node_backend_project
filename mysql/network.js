@@ -1,6 +1,6 @@
 const express = require('express');
 const response = require('../../../network/response');
-const store = require('../store/remote-mysql');
+const store = require('../store/mysql');
 
 const router = express.Router();
 
