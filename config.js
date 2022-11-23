@@ -25,5 +25,12 @@ module.exports = {
         password: process.env.MYSQL_SRV_PASSWORD || 'admin',
         database: process.env.MYSQL_SRV_DATABASE || 'database',
         port: process.env.MYSQL_SRV_PORT || 3308,
+    },
+    cacheService: {
+        servicePort: process.env.REDIS_SERVICE_PORT || 3003,
+        host: process.env.REDIS_HOST || 'redis-14385.c82.us-east-1-2.ec2.cloud.redislabs.com',
+        user: process.env.REDIS_USER || 'default',
+        port: process.env.REDIS_PORT || 14385,
+        password: process.env.REDIS_PASSWORD || 'nUyLjf4jRXkw2eOuoUedh3ngZLnwbhUl',
     }
 }
